@@ -1,7 +1,16 @@
 const UsuarioModel = require("../Models/UsuarioModel")
 const jwt = require("jsonwebtoken")
 
+/**
+ * UserController is responsible for intermediating the business logic and visualization
+ */
 class UserController {
+    /**
+     * This function tries to create a new user, if the user already exists the function sends back an http error 412
+     * @param {*} req Express http request
+     * @param {*} res Express http response
+     * @returns undefined
+     */
     async store(req, res){
         const { login, senha, nome } = req.body;
         try {
@@ -18,6 +27,12 @@ class UserController {
         }
     }
 
+    /**
+     * The login method is responsible for generating the JWT tokens to access private endpoints.
+     * @param {*} req Express http request
+     * @param {*} res Express http response
+     * @returns undefined 
+     */
     async login(req, res){
         const { login, senha } = req.body
         if (!login || !senha) {
@@ -45,6 +60,12 @@ class UserController {
         }    
     }
 
+    /**
+     * The show method send back all the data of the user is logged in
+     * @param {*} req Express http request
+     * @param {*} res Express http response
+     * @returns undefined
+     */
     async show(req, res ) {
         console.log(req.loggedUsuario)
         const usuario = new UsuarioModel(req.loggedUsuario)

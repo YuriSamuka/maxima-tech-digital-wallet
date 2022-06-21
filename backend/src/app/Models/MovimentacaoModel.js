@@ -1,5 +1,8 @@
 const MovimentacaoRepository = require("../Repo/MovimentacaoRepository");
 
+/**
+ * The MovimentacaoModel class is responsible for representing the MOVIMENTACAO entity and holds its business logic
+ */
 class MovimentacaoModel {
     constructor( login_origem, login_destino, valor_transferido, id_transacao = null){
         this.id_transacao = id_transacao || '';
@@ -11,6 +14,9 @@ class MovimentacaoModel {
         this.Promise = this.build()
     }
 
+    /**
+     * build function tries to find the transaction that was passed by the login attribute in the database, if it is found then it builds the object with it, if not the object remains the same
+     */
     async build(){
         try {
             const result = await MovimentacaoRepository.findById(this.id_transacao);
@@ -27,6 +33,9 @@ class MovimentacaoModel {
         }
     }
 
+    /**
+     * Save the MOVIMENTACAO data in the database, if the transaction does not exist in the database, a new one is created
+     */
     async store(){
         await Promise.resolve(this.Promise)
         if (this.isItNew) {

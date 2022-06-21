@@ -2,6 +2,9 @@ const UsuarioRepository = require("../Repo/UsuarioRepository");
 const MovimentacaoModel = require("../Models/MovimentacaoModel");
 const MovimentacaoRepository = require("../Repo/MovimentacaoRepository");
 
+/**
+ * The UsuarioModel class is responsible for representing the USUARIO entity and holds its business logic
+ */
 class UsuarioModel {
     constructor( login, senha, nome, saldo ){
         this.login = login
@@ -12,6 +15,9 @@ class UsuarioModel {
         this.Promise = this.build()
     }
 
+    /**
+     * build function tries to find the user that was passed by the login attribute in the database, if it is found then it builds the object with it, if not the object remains the same
+     */
     async build(){
         try {
             const result = await UsuarioRepository.findByLogin(this.login);
@@ -27,6 +33,9 @@ class UsuarioModel {
         }
     }
 
+    /**
+     * Save the USUARIO data in the database, if the user does not exist in the database, a new one is created
+     */
     async store(){
         await Promise.resolve(this.Promise)
         if (this.isItNew) {
@@ -40,6 +49,11 @@ class UsuarioModel {
         }
     }
 
+    /**
+     * Receives a UsuarioModel object and a value to be transferred and performs the transaction
+     * @param {*} usuarioDestino Usuario destiono
+     * @param {*} value valor a ser transferido
+     */
     async transfer(usuarioDestino, value){
         await Promise.resolve(this.Promise)
         try {
@@ -55,6 +69,9 @@ class UsuarioModel {
         }
     }
 
+    /**
+     * Update user saldo field in database
+     */
     async updateSaldo(){
         await Promise.resolve(this.Promise)
         try {
@@ -69,6 +86,10 @@ class UsuarioModel {
         }
     }
 
+    /**
+     * Get all transactions from the user that is built
+     * @returns transactions[]
+     */
     async transactions(){
         await Promise.resolve(this.Promise)
         try {

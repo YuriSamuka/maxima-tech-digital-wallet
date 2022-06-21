@@ -1,6 +1,13 @@
 const jwt = require("jsonwebtoken")
 
 class AuthHandler {
+    /**
+     * 
+     * @param {*} req Express http request
+     * @param {*} res Express http response
+     * @param {*} next The next function the keep going after verification
+     * @returns undefined
+     */
     async verifyAccessToken(req, res, next){
         const authHeader = req.headers['authorization']
         if (!authHeader) {

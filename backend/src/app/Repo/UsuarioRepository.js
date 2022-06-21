@@ -44,11 +44,6 @@ class UsuarioRepository{
         console.log(rows);
         return rows[0]
     }
-
-    async deleteById(id) {
-        // const Sql = 'DELETE FROM users WHERE id = $1';
-        // await this.db.Query(Sql, [id]);
-    }
 }
 
 module.exports = new UsuarioRepository()
