@@ -29,7 +29,7 @@ export const SignUp = () => {
             setSenha('');
             setSuccess(true);
         } catch (err) {
-            setErrMsg(JSON.stringify(err))
+            setErrMsg(err?.response?.data.Error)
         }
     }
 

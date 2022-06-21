@@ -34,8 +34,7 @@ export const Transfer = () => {
             setSuccess(true)
             setMsg("Sua transação foi concluida com sucesso")
         } catch (err) {
-            setMsg(err.message)
-            alert(err)
+            setMsg(err?.response?.data.Error)
         }
     }
 
@@ -43,9 +42,13 @@ export const Transfer = () => {
         <>
             <Card.Body>
                 <Card.Title>Make a transfer</Card.Title>
-                <Card.Text className={success ? "alert alert-success" : ""}>
-                    {msg ? msg : ""}
-                </Card.Text>
+                {msg ?
+                    <Card.Text className={msg && success ? "alert alert-success" : "alert alert-danger"}>
+                        {msg}
+                    </Card.Text>
+                    :
+                    ""
+                }
                 <form>
                     <div className="mb-3">
                         <label htmlFor="login_destino">Destinatário</label>
