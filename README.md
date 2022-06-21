@@ -8,14 +8,13 @@ This repository is a challenge for a position job at Maximatech and aims to show
 ## Run Details summary:
 
 ```
+docker-compose up -d
 cd backend
 npm i
 node .\src\app\index.js
 cd ..
 cd frontend
 npm start
-cd ..
-docker-compose up -d
 ```
 
 
@@ -27,23 +26,13 @@ We use PostgreSQL for database queries, to install:
 - [Windows](https://www.postgresql.org/download/windows/)
 - [Linux](https://www.postgresql.org/download/linux/)
 
-After install PostgreSQL create a database;
-
-```shell
-➜  user git:(master) ✗ psql
-psql (12.2)
-Type "help" for help.
-
-brabo=# CREATE DATABASE postgres;
+After install PostgreSQL run the migrations to initialize the database and create the tables from schema.sql.
+```
+cd .\backend\src\database\
+node .\runMigrations.js migration_001
 ```
 
 ---
-
-### Server Side
-#### Schema creation / migration / db updates
-
-To create the first schema or update your db with new schema updates, we need to create it manualy. Just execute de SQL scrip in backend/src/database/schema.sql.
-
 
 ## The API
 
@@ -116,6 +105,8 @@ The /register endpoint is responsible for registering a new user in the applicat
 * Authenticated: false
 * Response: none
 
+---
+
 ### Transaction endpoints
 ```
 [BASE_URL]/movimentacao/transfer
@@ -151,6 +142,7 @@ The /movimentacao endpoint returns all transactions made by the logged in user
     }
 ]
 ```
+---
 ### Error handling
 Aways when a request fails by any reason the API will response the respecting http error code and the following response body:
 ```
