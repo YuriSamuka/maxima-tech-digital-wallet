@@ -1,4 +1,5 @@
 const UsuarioModel = require("../Models/UsuarioModel")
+const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken")
 
 /**
@@ -14,7 +15,8 @@ class UserController {
     async store(req, res){
         const { login, senha, nome } = req.body;
         try {
-            const newUsuario = new UsuarioModel(login, senha, nome)
+            const hashedPassword = await bcrypt.hash(senha, 10);
+            const newUsuario = new UsuarioModel(login, hashedPassword, nome)
             await newUsuario.build()
             if (newUsuario.isItNew) {
                 newUsuario.store()
@@ -43,7 +45,8 @@ class UserController {
         if (foundUsuario.isItNew) {
             return res.sendStatus(401)
         }
-        if (foundUsuario.senha == senha) {
+        const bothMatch = await bcrypt.compare(senha, foundUsuario.senha);
+        if (bothMatch) {
             const accessToken = jwt.sign(
                 {"login" : foundUsuario.login},
                 process.env.ACCESS_TOKEN_SECRET,
