@@ -21,6 +21,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "homepage": "http://digitalwallet.s3-website-us-east-1.amazonaws.com",
   "eslintConfig": {
     "extends": [
       "react-app",

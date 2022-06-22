@@ -3,3 +3,6 @@
 # dependencies
 backend/node_modules
 frontend/node_modules
+
+# artefacts
+frontend/build

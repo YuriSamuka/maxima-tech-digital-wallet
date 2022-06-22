@@ -8,3 +8,9 @@ services:
       POSTGRES_DB: postgres
     ports:
       - "5432:5432"
+  backend:
+    depends_on:
+      - postgres
+    build: .
+    ports:
+      - "3500:3500"

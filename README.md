@@ -6,34 +6,39 @@ Welcome to the monorepo of maxima-tech-digital-wallet app.
 This repository is a challenge for a position job at Maximatech and aims to show in practice all my hard and soft skills as a developer.
 
 ## Run Details summary:
+### Configuration file:
 The .env file at the root of the backend folder is the configuration file where the database environment variables are set. The secrets to generate the JWT in the authentication process are also configured in this file. The starting balance amount that every user gets when registering an account.
-To run the app in dev mode, follow these steps after downloading the monorepo.
 
-```
-docker-compose up -d
-cd backend
-npm i
-node .\src\app\index.js
-cd ..
-cd frontend
-npm start
-```
-
-
-## Database
-
+### Database
 We use PostgreSQL for database queries, to install:
 
 - [MacOS](https://gist.github.com/ibraheem4/ce5ccd3e4d7a65589ce84f2a3b7c23a3)
 - [Windows](https://www.postgresql.org/download/windows/)
 - [Linux](https://www.postgresql.org/download/linux/)
 
-After install PostgreSQL run the migrations to initialize the database and create the tables from schema.sql.
+## Backend run details:
+First install docker and docker compose
+
+- [MacOS](https://gist.github.com/ibraheem4/ce5ccd3e4d7a65589ce84f2a3b7c23a3)
+- [Windows](https://www.postgresql.org/download/windows/)
+- [Linux](https://www.postgresql.org/download/linux/)
+
+After installing docker and docker compose, create a backend image from the Dockerfile by doing the following:
+```
+cd backend
+sudo docker build -t app .
+```
+After creating a backend image, run docker compose to get the created services running
+```
+cd backend
+sudo docker-compose up -d
+```
+
+After installing PostgreSQL and docker and putting the services live, run the migrations to initialize the database and create the tables from schema.sql.
 ```
 cd .\backend\src\database\
 node .\runMigrations.js migration_001
 ```
-
 ---
 
 ## The API
